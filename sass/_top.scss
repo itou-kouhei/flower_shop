@@ -1,0 +1,79 @@
+@use "./mixins" as *;
+
+// 共通設定ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--text); //文字の色
+  line-height: 2; //行間を1文字分とる
+  font-family: "Shippori Mincho", serif; //　フォントの指定
+}
+
+// 画像の指定
+img {
+  display: block; //画像は最初からdisplay: block;にしとく。後で下の余白とか気にせずするため。
+}
+
+// リンクの指定
+a {
+  color: var(--primary);
+
+  &:hover {
+    color: var(--secondary); //ホバーした時の文字の色
+  }
+}
+
+// リストスタイルの指定
+ul,
+ol {
+  list-style: none; //リストスタイルを消す。箇条書きの黒丸を消す。
+}
+
+// 共通パーツ
+.container {
+  max-width: 1200px;
+  margin-left: auto; //中央揃え
+  margin-right: auto; //中央揃え
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.section {
+  padding-top: 100px;
+  padding-bottom: 50px;
+
+  &__head {
+    width: 250px;
+    padding-bottom: 8px; //見出しの下に16pxの余白
+    position: relative;
+    text-align: center; //箱の中で文字が中央に配置される
+    font-weight: normal; //元々太字のフォントなので文字の太さを普通にする
+
+    // 擬似要素で見出しのスタライブ方の下線をつくる
+    &::after {
+      //ストライプの下線の箱のサイズと位置の指定
+      content: "";
+      position: absolute; //見出しの下に置きたいのでabsoluteをかけて見出しを基準にbottom: 0;で下にくる。
+      bottom: 0; //見出しの下余白の16pxにくっつく
+      left: 0;
+      width: 100%;
+      height: 7px; //下線の高さ（縦の幅）
+
+      //下線のストライプ
+      --size: 2px; //ストライプのサイズ。変数を使うことでスタイルプの数値をここで直すだけ連動して下の変数の中身が変わる。
+      background: repeating-linear-gradient(
+        -45deg,
+        #ffffff 0,
+        #ffffff var(--size),
+        var(--secondary) var(--size),
+        var(--secondary) calc(var(--size) * 2)
+      );
+    }
+  }
+}

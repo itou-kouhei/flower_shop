@@ -7,12 +7,19 @@
     <title>新宿区曙橋駅のお花屋さん｜sunday flour</title>
     <meta name="description"
         content="東京都新宿区「曙橋駅」にある、町のお花屋さんです。お花や鉢物の他、日持ちするプリザーブドフラワーや石鹸で出来たソープフラワー、園芸用品や花瓶などの雑貨も取り扱っております。大切な贈り物はもちろん、切り花１輪から是非ご相談ください。">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.min.css">
+
 </head>
 
 <body>
 
-    <header>
-        <nav>
+    <header class="site-header">
+        <nav class="global-nav">
             <!-- "#news"のところは格セクションの紐付け　ページ内ショートカット -->
             <li><a href="#news">お知らせ</a></li>
             <li><a href="#event">催し物</a></li>
@@ -20,14 +27,14 @@
         </nav>
 
         <!-- logo -->
-        <div>
+        <div class="site-logo">
             <!-- h1の中にロゴの画像を入れる -->
             <h1><img src="img/mv_logo.png" alt="sunday flour"></h1>
             <p>日曜日の彩りを、今日も。</p>
         </div>
 
         <!-- jsのslickでスライドショーさせる箱 -->
-        <div>
+        <div class="mv">
             <!-- さらに格画像をdivで囲うのは、divをスライドさせる形にする。そうすることで、後で文字などを足したいときにもdivの中に文字を入れたりすることが出来るため。このように１つ箱を用意することで後々便利。 -->
             <div><img src="img/top_01.jpg" alt=""></div>
             <div><img src="img/top_02.jpg" alt=""></div>
@@ -38,35 +45,37 @@
     </header>
 
     <main>
-        <section>
-            <div>
-                <!-- テキスト -->
-                <div>
-                    <h2>私たちは東京都新宿区「曙橋駅」にある、町のお花屋さんです。</h2>
-                    <p>お花や鉢物の他、日持ちするプリザーブドフラワーや石鹸で出来たソープフラワー、園芸用品や花瓶などの雑貨も取り扱っております。<br>
+        <section class="introduction">
+            <div class="container introduction__container">
+                <!-- テキストエリア -->
+                <div class="introduction__container">
+                    <h2 class="introduction__head">私たちは東京都新宿区「曙橋駅」にある、町のお花屋さんです。</h2>
+                    <p class="introduction__lead">お花や鉢物の他、日持ちするプリザーブドフラワーや石鹸で出来たソープフラワー、園芸用品や花瓶などの雑貨も取り扱っております。<br>
                         大切な贈り物はもちろん、切り花１輪から是非ご相談ください。<br>
                         スタッフ一同、心よりお待ちしております。</p>
                 </div>
                 <!-- 画像 -->
-                <div>
+                <div class="container introduction__img">
                     <img src="img/hana_right.png" alt="">
                 </div>
             </div>
         </section>
 
+
         <!-- 背景固定のところ -->
-        <div>
+        <div class="bg-inbetween">
             <img src="img/bg_img01.jpg" alt="">
         </div>
 
-        <!-- お知らせ -->
+
+        <!-- セクション_お知らせ -->
         <!-- idはページ内ショートカットのため。navの各項目の＃〜に紐付けすることで実現できる-->
-        <section id="news">
-            <div>
-                <h2>お知らせ</h2>
+        <section id="news" class="section news">
+            <div class="container">
+                <h2 class="section__head">お知らせ</h2>
 
                 <!-- 3つの画像のところ -->
-                <ul>
+                <ul class="news__list">
                     <li>
                         <a href="#">
                             <img src="img/news01.jpg" alt="">
@@ -88,104 +97,133 @@
                 </ul>
 
                 <!-- 花の画像 -->
-                <div>
+                <div class="news__img">
                     <img src="img/hana_bottom.png" alt="">
                 </div>
             </div>
         </section>
 
+
         <!-- 背景固定のところ -->
-        <div>
+        <div class="bg-inbetween">
             <img src="img/bg_img02.jpg" alt="">
         </div>
 
-        <!-- 催し物 -->
-        <section id="event">
-            <div>
-                <h2>今月のお花教室</h2>
 
-                <!-- 1カラム目 -->
-                <div>
-                    <!-- 画像付き文章 -->
-                    <article>
-                        <img src="img/school.jpg" alt="">
-                        <h3>6月は「あじさいを使ったブーケ」を作ります。</h3>
-                        <p>当店では毎月、季節に合った草花を使って小物などを作るお花の教室を行っています。<br>
-                            色々な告知や、教室の雰囲気、イベントレポートなどは随時ブログにて！<br>
-                            ぜひ、お店に遊びに来てくださいね。</p>
-                    </article>
-                    <!-- ボタンのところ -->
-                    <a href="#">お店のブログはこちら</a>
-                </div>
+        <!-- セクション_催し物 -->
+        <section id="event" class="section event">
+            <div class="container">
+                <h2 class="section__head">今月のお花教室</h2>
 
-                <!-- 2カラム目 -->
-                <div>
-                    <!-- 文章 -->
-                    <article>
-                        <h3>一緒に、お花を楽しみませんか？</h3>
-                        <p>7月はお子様の自由研究にもぴったりな「夏のお花を使った押し花作り」を予定しております。
-                            お花教室のお申し込みはこちらから、メールにてお願いします。</p>
-                    </article>
-                    <!-- サイト自体の装飾画像 -->
+                <div class="event__container">
+                    <!-- 1カラム目 -->
                     <div>
-                        <img src="img/hana.png" alt="">
+                        <!-- 画像付き文章 -->
+                        <article class="event-article">
+                            <img src="img/school.jpg" alt="" class="event-article-img">
+                            <h3 class="event-article-head">6月は「あじさいを使ったブーケ」を作ります。</h3>
+                            <p class="event-article-text">当店では毎月、季節に合った草花を使って小物などを作るお花の教室を行っています。<br>
+                                色々な告知や、教室の雰囲気、イベントレポートなどは随時ブログにて！<br>
+                                ぜひ、お店に遊びに来てくださいね。</p>
+                        </article>
+
+                        <!-- ボタンのところ -->
+                        <a href="#" class="btn btn-primary">お店のブログはこちら</a>
+                    </div>
+
+                    <!-- 2カラム目 -->
+                    <div>
+                        <!-- 文章 -->
+                        <article class="event-article">
+                            <h3 class="event-article-head">一緒に、お花を楽しみませんか？</h3>
+                            <p class="event-article-text">7月はお子様の自由研究にもぴったりな「夏のお花を使った押し花作り」を予定しております。
+                                お花教室のお申し込みはこちらから、メールにてお願いします。</p>
+                        </article>
+
+                        <!-- サイト自体の装飾画像 -->
+                        <div class="event__img">
+                            <img src="img/hana.png" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
+
         <!-- 背景固定のところ -->
-        <div>
+        <div class="bg-inbetween">
             <img src="img/bg_img03.jpg" alt="">
         </div>
 
-        <!-- 店舗情報 -->
-        <section id="access">
-            <div>
-                <h2></h2>
 
-                <div>
+        <!-- セクション_店舗情報 -->
+        <section id="access" class="section access">
+            <div class="container">
+                <h2 class="section__head">店舗情報</h2>
+
+                <div class="access__container">
                     <!-- 1カラム目 住所 -->
                     <div>
-                        <dl>
+                        <dl class="access__shopinfo">
                             <!-- (dt+dd)*5 -->
-                            <dt></dt>
-                            <dd></dd>
+                            <dt>店名</dt>
+                            <dd>sunday flower</dd>
 
-                            <dt></dt>
-                            <dd></dd>
+                            <dt>営業時間</dt>
+                            <dd>10時～18時半</dd>
 
-                            <dt></dt>
-                            <dd></dd>
+                            <dt>定休日</dt>
+                            <dd>年末年始及びお盆明け</dd>
 
-                            <dt></dt>
-                            <dd></dd>
+                            <dt>住所</dt>
+                            <dd>〒160-0005 <br>
+                                東京都新宿区愛住町22 <br>
+                                第三山田ビル2F <br>
+                                <!-- Google Mapのボタンリンク リンクはMapのリンクを持ってくる -->
+                                <a href="https://maps.app.goo.gl/AyLNyPQ12TKF3Rxs8" target="_blank"
+                                    class="btn btn-primary-line">Google Maps</a>
+                            </dd>
 
-                            <dt></dt>
-                            <dd></dd>
+                            <dt>電話/FAX</dt>
+                            <dd>03-1234-5678</dd>
                         </dl>
                     </div>
 
                     <!-- 2カラム目  map -->
                     <div>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.397731897632!2d139.71556668443986!3d35.69182895871645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188d5bce063c37%3A0xb548b9250334152f!2z44Kk44Oz44K_44O844OX44Op44OzSVTjgrnjgq_jg7zjg6s!5e0!3m2!1sja!2sjp!4v1707235079827!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>  
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.397731897632!2d139.71556668443986!3d35.69182895871645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188d5bce063c37%3A0xb548b9250334152f!2z44Kk44Oz44K_44O844OX44Op44OzSVTjgrnjgq_jg7zjg6s!5e0!3m2!1sja!2sjp!4v1707235079827!5m2!1sja!2sjp"
+                            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade" class="access__map"></iframe>
                     </div>
                 </div>
 
                 <!-- ボタン -->
-                <div><a href="#">お問い合わせ</a></div>
+                <div class="access__contact">
+                    <a href="#" class="btn btn-primary">お問い合わせ</a>
+                </div>
             </div>
         </section>
 
+
         <!-- 背景固定のところ -->
-        <div>
+        <div class="bg-inbetween">
             <img src="img/bg_img04.jpg" alt="">
         </div>
     </main>
 
-    <footer>
-        <div><img src="img/bottom_logo.png" alt="sunday flour"></div>
-        <small>&copy; sunday flower All Rights Reserved.</small>
+    <footer class="site-footer">
+        <div class="container">
+            <!-- ページtopに戻るボタン -->
+            <div class="pagetop">
+                <a href="#">
+                    <img src="img/to_top.png" alt="ページトップへ戻る">
+                </a>
+            </div>
+
+            <div class="site-footer__logo"><img src="img/bottom_logo.png" alt="sunday flour"></div>
+            <small class="copyright">&copy; sunday flower All Rights Reserved.</small>
+        </div>
     </footer>
 
 </body>
@@ -209,21 +247,15 @@
                         
 =====
 【店舗情報】
-店舗情報
 
-店名
-sunday flower
-営業時間
-10時～18時半
-定休日
-年末年始及びお盆明け
-住所
-〒160-0005
-東京都新宿区愛住町22
-第三山田ビル2F
-Google Maps
-電話/FAX
-03-1234-5678
+
+
+
+
+
+
+
+
 
 お問い合わせ
 
