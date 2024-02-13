@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="js/slick/slick.css">
     <link rel="stylesheet" href="css/style.min.css">
 
 </head>
@@ -44,11 +45,27 @@
         <!-- jsのslickでスライドショーさせる箱 -->
         <div class="mv">
             <!-- さらに格画像をdivで囲うのは、divをスライドさせる形にする。そうすることで、後で文字などを足したいときにもdivの中に文字を入れたりすることが出来るため。このように１つ箱を用意することで後々便利。 -->
-            <div><img src="img/top_01.jpg" alt=""></div>
-            <div><img src="img/top_02.jpg" alt=""></div>
-            <div><img src="img/top_03.jpg" alt=""></div>
-            <div><img src="img/top_04.jpg" alt=""></div>
-            <div><img src="img/top_05.jpg" alt=""></div>
+            <!-- style="--img:url(img/top_01.jpg)"は--imgで変数を作ってマスク画像の対応 -->
+            <div class="mv__panel" style="--img:url(../img/top_01.jpg)">
+                <img src="img/top_01.jpg" alt="">
+            </div>
+            <div class="mv__panel" style="--img:url(../img/top_02.jpg)">
+                <img src="img/top_02.jpg" alt="">
+            </div>
+            <div class="mv__panel" style="--img:url(../img/top_03.jpg)">
+                <img src="img/top_03.jpg" alt="">
+            </div>
+            <div class="mv__panel" style="--img:url(../img/top_04.jpg)">
+                <img src="img/top_04.jpg" alt="">
+            </div>
+            <div class="mv__panel" style="--img:url(../img/top_05.jpg)">
+                <img src="img/top_05.jpg" alt="">
+            </div>
+        </div>
+
+        <!-- スクロールを促すアニメーションがかかったイラストみたいなやつ -->
+        <div class="scroll-indicator">
+            scroll
         </div>
     </header>
 
@@ -234,39 +251,10 @@
         </div>
     </footer>
 
+    <script src="js/jquery/jquery-3.7.1.min.js"></script>
+    <script src="js/slick/slick.min.js"></script>
+    <script src="js/script.js"></script>
+    
 </body>
 
 </html>
-
-
-
-
-
-<!-- =====
-【催し物】
-
-
-                     
-
-
-
-
-
-                        
-=====
-【店舗情報】
-
-
-
-
-
-
-
-
-
-
-お問い合わせ
-
-=====
-【コピーライト】
- -->

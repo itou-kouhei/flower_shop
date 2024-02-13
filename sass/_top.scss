@@ -18,6 +18,7 @@ body {
 // 画像の指定
 img {
   display: block; //画像は最初からdisplay: block;にしとく。後で下の余白とか気にせずするため。
+  max-width: 100%;
 }
 
 // リンクの指定
@@ -171,7 +172,7 @@ ol {
         }
       }
     }
-
+  }
     //チェックボックス
     &-toggler {
       display: none; //要素を消す
@@ -259,9 +260,8 @@ ol {
       background-color: var(--text);
     }
 
-    //PCの設定＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+    //PCの設定(ナビゲーションの設定)＝＝＝＝＝＝＝＝＝＝＝
     @include mq {
-      //ナビゲーションの設定
       width: 100%;
       height: auto;
       overflow: auto;
@@ -303,16 +303,219 @@ ol {
         }
       }
 
-
       //３本線のボタンの設定
       &-btn {
         display: none; //PCの画面では３本線のボタンは消す。600pxまで画面幅を小さくすると表示される。
       }
-
-
-
-
-
     }
-
   } // .global-nav 
+
+  //メインビジュアルの指定ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+  .mv {
+    height: 85vh; //画面サイズに対して常に高さが85％
+
+    // slickの指定
+  .slick-list,
+  .slick-track {
+    height: 100%; //slickは元々高さの指定がされていないのでslickを入れたときmvの大きさが小さくなるので高さを戻す。
+  }
+// メインビジュアルの下をカーブさせる方法。擬似要素で中に背景画像を登場させて同じ画像を使って重ねてカーブのところを作る。
+    &__panel {
+      // メインビジュアルの画像の下をカーブさせる方法。　でもこれは微妙なので自分でfigmaで形を作成したsvg画像を使ってマスク機能のやる。
+      // border-bottom-right-radius: 50% 30px; //角丸
+      // border-bottom-left-radius: 50% 30px; //角丸
+      // overflow: hidden;
+      height: 100%;
+      position: relative;
+      filter: brightness(70%); //mvの明るさを下げてロゴなどを見やすくする。
+      
+      //元の画像の指定
+      img {
+        clip-path: inset(0 0 15px 0); //(時計回り); clip-pathは対象の要素の(時計回り);で指定した範囲をカットする機能。なのでこの場合画像のしたから15px分の部分を切ったということ。
+        width: 100%;
+        height: 100%;
+        object-fit: cover; //画像の比率を保つ
+        // object-position: center center; //初期値で書かなくてもこの状態。なので下の擬似要素の画像の表示の統合をとっている。background: var(--image) no-repeat center center;ここの部分。
+      }
+
+      //擬似要素で中に背景画像を登場させて同じ画像を使って重ねてカーブのところを作る。これはHTMLの方で変数でstyleをもたしてるやつ。
+      &::after {
+        content: "";
+        background: var(--image) no-repeat center center; //擬似要素の中に背景画像を登場させてHTMLの方でstyleをもたして変数を使う。
+        mask-image: url(../img/curve.svg); //マスク機能　url(../img/curve.svg)はfigmaで作ったマスクをかけたいsvg画像
+        mask-repeat: no-repeat; //上記のマスク機能呼び出すと初期値でマスクの画像がリピートで表示されるので1個だけにする。
+        mask-position: center bottom; // (X)(Y); 対象の画像全体にマスクがかかっていのでかけたい位置を指定。
+        mask-size: 100% calc(15px + 0.08%); //(X)(Y);サイズの指定。(Y)の部分はマスクと元の画像のカットした部分を綺麗に合わせる細かい指定。ただこれはsvgのコードにある(viewBox="0 0 100 15")を消す必要がある。このコードはsvg画像の縦横比を保って形を崩さない指定なのでこれがあるとサイズの指定で形が変えられない。
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        bottom: 0;
+        left: 0;
+      }
+      }
+  }
+
+  //ロゴの配置の指定ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+  //ロゴの配置のための基準
+  .site-header {
+    position: relative; //これでmvの領域内の中でロゴが自由に動ける。
+  }
+  
+//ロゴの配置
+  .site-logo {
+    position: absolute;
+    z-index: 1; //後ろに隠れているので前に出す。
+    bottom: 25%;  //これでmvの領域の下から25％の位置に配置。
+    left: 0;
+  
+    //ロゴについてるキャッチコピーのテキスト
+    p {
+      color: #fff;
+      text-align: center; //テキストが中央に配置
+    }
+  }
+  
+  // スクロールを促すアニメーションがかかったイラストみたいなやつの作成
+  .scroll-indicator {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%) rotate(90deg);
+    color: #fff;
+    font-size: 0.8rem;
+    z-index: 1;
+    animation: scroll-indicator 1s infinite;
+  
+    //矢印の縦棒の作成
+    &::before {
+      content: "";
+      height: 1px;
+      width: 110%; //＋10％で棒を少し長くする。
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: #fff;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 1px;
+      top: 0;
+      right: -10%;
+      background: #fff;
+      transform: rotate(30deg);
+      transform-origin: right bottom;
+    }
+  }
+  
+  @keyframes scroll-indicator {
+    0%,
+    100% {
+      transform: translateY(0) translateX(-50%) rotate(90deg);
+    }
+    50% {
+      transform: translateY(15px) translateX(-50%) rotate(90deg);
+    }
+  }
+  
+  // イントロダクション
+  .introduction {
+    margin-top: 100px;
+    padding-bottom: 50px;
+  
+    &__head {
+      font-size: 1.5rem;
+      font-weight: normal;
+      margin-bottom: 50px;
+    }
+  
+    &__img {
+      img {
+        width: 50%;
+        margin-left: auto;
+      }
+    }
+  
+    // PC =====
+    @include mq {
+      &__container {
+        display: flex;
+      }
+  
+      &__text {
+        flex-basis: 65%;
+        flex-shrink: 0;
+      }
+  
+      &__lead {
+        max-width: 25rem;
+      }
+  
+      &__img {
+        img {
+          width: auto;
+          margin-left: 0;
+        }
+      }
+    }
+  } //.introduction
+  
+  // ニュース
+  .news {
+    &__list {
+      li {
+        &:not(:first-child) {
+          margin-top: 50px;
+        }
+  
+        a {
+          background: #333;
+          text-align: center;
+          display: block;
+        }
+  
+        a img {
+          transition: 0.3s;
+        }
+  
+        a:hover img {
+          filter: brightness(90%);
+        }
+      }
+    }
+  
+    &__img {
+      margin-top: 50px;
+  
+      img {
+        width: 50%;
+        margin-right: auto;
+      }
+    }
+  
+    // PC =====
+    @include mq {
+      &__list {
+        display: flex;
+        gap: 5%;
+        // justify-content: space-between;
+  
+        li {
+          flex-basis: 33.333%;
+          // flex-basis: 30%;
+  
+          &:not(:first-child) {
+            margin-top: 0;
+          }
+        }
+      } //list
+  
+      &__img {
+        img {
+          width: 30%;
+          translate: -20% 0;
+        }
+      }
+    }
+  } //.news
