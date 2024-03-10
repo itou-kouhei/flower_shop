@@ -1,27 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>新宿区曙橋駅のお花屋さん｜sunday flour</title>
     <meta name="description"
-        content="東京都新宿区「曙橋駅」にある、町のお花屋さんです。お花や鉢物の他、日持ちするプリザーブドフラワーや石鹸で出来たソープフラワー、園芸用品や花瓶などの雑貨も取り扱っております。大切な贈り物はもちろん、切り花１輪から是非ご相談ください。">
+        content="東京都新宿区「曙橋駅」にある、町のお花屋さんです。お花や鉢物の他、日持ちするプリザーブドフラワーや石鹸で出来たソープフラワー、園芸用品や花瓶などの雑貨も取り扱っております。大切な贈り物はもちろん、切り花１輪から是非ご相談ください。" />
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700&display=swap" rel="stylesheet" />
 
-    <link rel="stylesheet" href="js/slick/slick.css">
-    <link rel="stylesheet" href="css/style.min.css">
-
+    <link rel="stylesheet" href="js/slick/slick.css" />
+    <link rel="stylesheet" href="js/aos/aos.css" />
+    <link rel="stylesheet" href="css/style.min.css" />
 </head>
 
 <body>
-
     <header class="site-header">
         <!-- ３本線ボタン -->
-        <input type="checkbox" class="global-nav-toggler" id="global-nav-toggler">
+        <input type="checkbox" class="global-nav-toggler" id="global-nav-toggler" />
         <label for="global-nav-toggler" class="global-nav-btn">
             <!-- ３本線を作るためのタグ -->
             <span>メニュー開閉</span>
@@ -29,16 +28,20 @@
 
         <!-- ナビゲーション -->
         <nav class="global-nav">
-            <!-- "#news"のところは格セクションの紐付け　ページ内ショートカット -->
-            <li><a href="#news">お知らせ</a></li>
-            <li><a href="#event">催し物</a></li>
-            <li><a href="#access">店舗情報</a></li>
+            <ul>
+                <!-- "#news"のところは格セクションの紐付け　ページ内ショートカット -->
+                <li><a href="#news">お知らせ</a></li>
+                <li><a href="#event">催し物</a></li>
+                <li><a href="#access">店舗情報</a></li>
+            </ul>
         </nav>
 
         <!-- logo -->
         <div class="site-logo">
             <!-- h1の中にロゴの画像を入れる -->
-            <h1><img src="img/mv_logo.png" alt="sunday flour"></h1>
+            <h1>
+                <img src="img/mv_logo.png" alt="sunday flour" />
+            </h1>
             <p>日曜日の彩りを、今日も。</p>
         </div>
 
@@ -46,52 +49,56 @@
         <div class="mv">
             <!-- さらに格画像をdivで囲うのは、divをスライドさせる形にする。そうすることで、後で文字などを足したいときにもdivの中に文字を入れたりすることが出来るため。このように１つ箱を用意することで後々便利。 -->
             <!-- style="--img:url(img/top_01.jpg)"は--imgで変数を作ってマスク画像の対応 -->
-            <div class="mv__panel" style="--img:url(../img/top_01.jpg)">
-                <img src="img/top_01.jpg" alt="">
+            <div class="mv__panel" style="--image: url(../img/top_01.jpg)">
+                <img src="img/top_01.jpg" alt="" />
             </div>
-            <div class="mv__panel" style="--img:url(../img/top_02.jpg)">
-                <img src="img/top_02.jpg" alt="">
+            <div class="mv__panel" style="--image: url(../img/top_02.jpg)">
+                <img src="img/top_02.jpg" alt="" />
             </div>
-            <div class="mv__panel" style="--img:url(../img/top_03.jpg)">
-                <img src="img/top_03.jpg" alt="">
+            <div class="mv__panel" style="--image: url(../img/top_03.jpg)">
+                <img src="img/top_03.jpg" alt="" />
             </div>
-            <div class="mv__panel" style="--img:url(../img/top_04.jpg)">
-                <img src="img/top_04.jpg" alt="">
+            <div class="mv__panel" style="--image: url(../img/top_04.jpg)">
+                <img src="img/top_04.jpg" alt="" />
             </div>
-            <div class="mv__panel" style="--img:url(../img/top_05.jpg)">
-                <img src="img/top_05.jpg" alt="">
+            <div class="mv__panel" style="--image: url(../img/top_05.jpg)">
+                <img src="img/top_05.jpg" alt="" />
             </div>
         </div>
 
-        <!-- スクロールを促すアニメーションがかかったイラストみたいなやつ -->
-        <div class="scroll-indicator">
-            scroll
-        </div>
+        <!-- スクロールを促すアニメーションがかかった矢印 -->
+        <div class="scroll-indicator">scroll</div>
     </header>
 
     <main>
         <section class="introduction">
             <div class="container introduction__container">
                 <!-- テキストエリア -->
-                <div class="introduction__container">
-                    <h2 class="introduction__head">私たちは東京都新宿区「曙橋駅」にある、町のお花屋さんです。</h2>
-                    <p class="introduction__lead">お花や鉢物の他、日持ちするプリザーブドフラワーや石鹸で出来たソープフラワー、園芸用品や花瓶などの雑貨も取り扱っております。<br>
+                <div class="introduction__text">
+                    <h2 class="introduction__head">
+                        私たちは東京都新宿区<br>
+                        「曙橋駅」にある、<br>
+                        町のお花屋さんです。
+                    </h2>
+                    <p class="introduction__lead">
+                        お花や鉢物の他、日持ちするプリザーブドフラワーや石鹸で出来たソープフラワー、園芸用品や花瓶などの雑貨も取り扱っております。<br>
                         大切な贈り物はもちろん、切り花１輪から是非ご相談ください。<br>
-                        スタッフ一同、心よりお待ちしております。</p>
+                        スタッフ一同、心よりお待ちしております。
+                    </p>
                 </div>
                 <!-- 画像 -->
-                <div class="container introduction__img">
-                    <img src="img/hana_right.png" alt="">
+                <div class="introduction__img">
+                    <img src="img/hana_right.png" alt="" data-aos="fade-up" />
                 </div>
             </div>
         </section>
 
-
         <!-- 背景固定のところ -->
         <div class="bg-inbetween">
-            <img src="img/bg_img01.jpg" alt="">
+            <div class="bg-inbetween__inner">
+                <img src="img/bg_img01.jpg" alt="" />
+            </div>
         </div>
-
 
         <!-- セクション_お知らせ -->
         <!-- idはページ内ショートカットのため。navの各項目の＃〜に紐付けすることで実現できる-->
@@ -101,21 +108,21 @@
 
                 <!-- 3つの画像のところ -->
                 <ul class="news__list">
-                    <li>
+                    <li data-aos="zoom-out" data-aos-duration="500">
                         <a href="#">
-                            <img src="img/news01.jpg" alt="">
+                            <img src="img/news01.jpg" alt="" />
                             <p>お花教室のご案内</p>
                         </a>
                     </li>
-                    <li>
+                    <li data-aos="zoom-out" data-aos-delay="400" data-aos-duration="500">
                         <a href="#">
-                            <img src="img/news02.jpg" alt="">
+                            <img src="img/news02.jpg" alt="" />
                             <p>6月のキャンペーン</p>
                         </a>
                     </li>
-                    <li>
+                    <li data-aos="zoom-out" data-aos-delay="800" data-aos-duration="500">
                         <a href="#">
-                            <img src="img/news03.jpg" alt="">
+                            <img src="img/news03.jpg" alt="" />
                             <p>営業時間について</p>
                         </a>
                     </li>
@@ -123,17 +130,17 @@
 
                 <!-- 花の画像 -->
                 <div class="news__img">
-                    <img src="img/hana_bottom.png" alt="">
+                    <img src="img/hana_bottom.png" alt="" />
                 </div>
             </div>
         </section>
 
-
         <!-- 背景固定のところ -->
         <div class="bg-inbetween">
-            <img src="img/bg_img02.jpg" alt="">
+            <div class="bg-inbetween__inner">
+                <img src="img/bg_img02.jpg" alt="" />
+            </div>
         </div>
-
 
         <!-- セクション_催し物 -->
         <section id="event" class="section event">
@@ -145,41 +152,51 @@
                     <div>
                         <!-- 画像付き文章 -->
                         <article class="event-article">
-                            <img src="img/school.jpg" alt="" class="event-article-img">
-                            <h3 class="event-article-head">6月は「あじさいを使ったブーケ」を作ります。</h3>
-                            <p class="event-article-text">当店では毎月、季節に合った草花を使って小物などを作るお花の教室を行っています。<br>
-                                色々な告知や、教室の雰囲気、イベントレポートなどは随時ブログにて！<br>
-                                ぜひ、お店に遊びに来てくださいね。</p>
+                            <img src="img/school.jpg" alt="" class="event-article__img" />
+                            <h3 class="event-article__head">
+                                6月は「あじさいを使ったブーケ」を作ります。
+                            </h3>
+                            <p class="event-article__text">
+                                当店では毎月、季節に合った草花を使って小物などを作るお花の教室を行っています。<br />
+                                色々な告知や、教室の雰囲気、イベントレポートなどは随時ブログにて！<br />
+                                ぜひ、お店に遊びに来てくださいね。
+                            </p>
                         </article>
 
                         <!-- ボタンのところ -->
-                        <a href="#" class="btn btn-primary">お店のブログはこちら</a>
+                        <div class="event__btn-area">
+                            <a href="#" class="btn btn-primary">お店のブログはこちら</a>
+                        </div>
                     </div>
 
                     <!-- 2カラム目 -->
                     <div>
                         <!-- 文章 -->
                         <article class="event-article">
-                            <h3 class="event-article-head">一緒に、お花を楽しみませんか？</h3>
-                            <p class="event-article-text">7月はお子様の自由研究にもぴったりな「夏のお花を使った押し花作り」を予定しております。
-                                お花教室のお申し込みはこちらから、メールにてお願いします。</p>
+                            <h3 class="event-article__head">
+                                一緒に、お花を楽しみませんか？
+                            </h3>
+                            <p class="event-article__text">
+                                7月はお子様の自由研究にもぴったりな「夏のお花を使った押し花作り」を予定しております。<br />
+                                お花教室のお申し込みはこちらから、メールにてお願いします。
+                            </p>
                         </article>
 
                         <!-- サイト自体の装飾画像 -->
                         <div class="event__img">
-                            <img src="img/hana.png" alt="">
+                            <img src="img/hana.png" alt="" />
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-
         <!-- 背景固定のところ -->
         <div class="bg-inbetween">
-            <img src="img/bg_img03.jpg" alt="">
+            <div class="bg-inbetween__inner">
+                <img src="img/bg_img03.jpg" alt="" />
+            </div>
         </div>
-
 
         <!-- セクション_店舗情報 -->
         <section id="access" class="section access">
@@ -201,9 +218,10 @@
                             <dd>年末年始及びお盆明け</dd>
 
                             <dt>住所</dt>
-                            <dd>〒160-0005 <br>
-                                東京都新宿区愛住町22 <br>
-                                第三山田ビル2F <br>
+                            <dd>
+                                〒160-0005 <br />
+                                東京都新宿区愛住町22 <br />
+                                第三山田ビル2F <br />
                                 <!-- Google Mapのボタンリンク リンクはMapのリンクを持ってくる -->
                                 <a href="https://maps.app.goo.gl/AyLNyPQ12TKF3Rxs8" target="_blank"
                                     class="btn btn-primary-line">Google Maps</a>
@@ -218,7 +236,7 @@
                     <div>
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.397731897632!2d139.71556668443986!3d35.69182895871645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188d5bce063c37%3A0xb548b9250334152f!2z44Kk44Oz44K_44O844OX44Op44OzSVTjgrnjgq_jg7zjg6s!5e0!3m2!1sja!2sjp!4v1707235079827!5m2!1sja!2sjp"
-                            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                            width="600" height="450" style="border: 0" allowfullscreen="" loading="lazy"
                             referrerpolicy="no-referrer-when-downgrade" class="access__map"></iframe>
                     </div>
                 </div>
@@ -230,10 +248,11 @@
             </div>
         </section>
 
-
         <!-- 背景固定のところ -->
         <div class="bg-inbetween">
-            <img src="img/bg_img04.jpg" alt="">
+            <div class="bg-inbetween__inner">
+                <img src="img/bg_img04.jpg" alt="" />
+            </div>
         </div>
     </main>
 
@@ -242,19 +261,21 @@
             <!-- ページtopに戻るボタン -->
             <div class="pagetop">
                 <a href="#">
-                    <img src="img/to_top.png" alt="ページトップへ戻る">
+                    <img src="img/to_top.png" alt="ページトップへ戻る" />
                 </a>
             </div>
 
-            <div class="site-footer__logo"><img src="img/bottom_logo.png" alt="sunday flour"></div>
+            <div class="site-footer__logo">
+                <img src="img/bottom_logo.png" alt="sunday flower" />
+            </div>
             <small class="copyright">&copy; sunday flower All Rights Reserved.</small>
         </div>
     </footer>
 
     <script src="js/jquery/jquery-3.7.1.min.js"></script>
     <script src="js/slick/slick.min.js"></script>
+    <script src="js/aos/aos.js"></script>
     <script src="js/script.js"></script>
-    
 </body>
 
 </html>

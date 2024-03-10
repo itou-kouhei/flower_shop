@@ -9,6 +9,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   color: var(--text); //文字の色
   line-height: 2; //行間を1文字分とる
@@ -56,6 +60,9 @@ ol {
     position: relative;
     text-align: center; //箱の中で文字が中央に配置される
     font-weight: normal; //元々太字のフォントなので文字の太さを普通にする
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
 
     // 擬似要素で見出しのスタライブ方の下線をつくる
     &::after {
@@ -69,11 +76,13 @@ ol {
 
       //下線のストライプ
       --size: 2px; //ストライプのサイズ。変数を使うことでスタイルプの数値をここで直すだけ連動して下の変数の中身が変わる。
-      background: repeating-linear-gradient(-45deg,
-          #ffffff 0,
-          #ffffff var(--size),
-          var(--secondary) var(--size),
-          var(--secondary) calc(var(--size) * 2));
+      background: repeating-linear-gradient(
+        -45deg,
+        #ffffff 0,
+        #ffffff var(--size),
+        var(--secondary) var(--size),
+        var(--secondary) calc(var(--size) * 2)
+      );
     }
   }
 }
@@ -88,6 +97,8 @@ ol {
   transition: 0.3s; //ホバーした時の変化の時間指定
   min-width: 200px; //ボタンの最小幅。ボタンのテキストが増えれば内容量によってボタンも大きくなる。
   text-align: center; //min-width: 200px;でボタンの幅が決まり、中のテキストが左に寄っているので中央に配置。
+  min-width: 200px;
+  text-align: center;
 
   //ボタンのスタイルの指定
   //1つ目のボタン
@@ -102,7 +113,7 @@ ol {
   }
 
   //2種類目のボタン
-  &.btn-primary-line {
+  &-primary-line {
     border: 1px solid #333;
     color: var(--primary);
 
@@ -112,21 +123,46 @@ ol {
   }
 }
 
+.bg-inbetween {
+  height: 55vh;
+  position: relative;
+
+  &__inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    clip-path: inset(0 0 0 0);
+  }
+
+  img {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+  }
+}
+
 // headerーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 .global-nav {
   //スマホのナビゲーションが開いている時のスタイル
   position: fixed; //画面固定にして
   width: 100; //幅は画面いっぱい
   height: 100%; //高も画面いっぱい
-  backdrop-filter: blur(4px); //背景のぼかしも画面いっぱい。()の中はぼかしの度合いを入れる。
+  backdrop-filter: blur(
+    4px
+  ); //背景のぼかしも画面いっぱい。()の中はぼかしの度合いを入れる。
   background-color: rgba(#fff, 0.9);
   display: flex; //ナビゲーションのテキスト項目を中央にするため。
   align-items: center; //これで縦軸の中央
   justify-content: center; //これで横軸の中央
 
-  //display: none; //最初はナビゲーションを消す。ボタンが押されたらナビゲーションが開くように下の221行で指定している。
-  z-index: -1; //下のopacity: 0;でナビゲーションが透明なだけで一番上に存在していてるのでリンクボタンなどは押せない状態になるもで一番後ろに回す。
+  // display: none; //最初はナビゲーションを消す。ボタンが押されたらナビゲーションが開くように下の221行で指定している。
   opacity: 0; //ナビゲーションを完全に透明な状態にする。
+  z-index: -1; //下のopacity: 0;でナビゲーションが透明なだけで一番上に存在していてるのでリンクボタンなどは押せない状態になるもで一番後ろに回す。
   transition: opacity 0.3s; //transitionをopacityのみに限定する。
 
   //ナビゲーションは一番後ろに回したけどやはり消えていないので、サイトの隙間から押せてしまう可能性があるからナビゲーションは高さ幅を無くしてさらに非表示にしておく。
@@ -134,11 +170,9 @@ ol {
   height: 0;
   overflow: hidden;
 
-
   //スマホのナビゲーションのストライプ型の下線の作成
   ul {
     li {
-
       //1つ目以外の項目に指定
       &:not(:first-child) {
         margin-top: 1rem;
@@ -164,358 +198,503 @@ ol {
 
           //下線にストライプを入れる
           --size: 2px; //ストライプのサイズ。変数を使うことでスタイルプの数値をここで直すだけ連動して下の変数の中身が変わる。
-          background: repeating-linear-gradient(-45deg,
-              #ffffff 0,
-              #ffffff var(--size),
-              var(--secondary) var(--size),
-              var(--secondary) calc(var(--size) * 2));
+          background: repeating-linear-gradient(
+            -45deg,
+            #ffffff 0,
+            #ffffff var(--size),
+            var(--secondary) var(--size),
+            var(--secondary) calc(var(--size) * 2)
+          );
         }
       }
     }
   }
-    //チェックボックス
-    &-toggler {
-      display: none; //要素を消す
+  // チェックボックス
+  &-toggler {
+    display: none; //要素を消す
+  }
+
+  //３本線のボタン作成ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+  //３本線の配置と領域の指定
+  &-btn {
+    position: fixed; //ビューポート（画面の表示領域）に対して固定。要素を一番上に配置するため。
+    top: 5%; //ビューポート（画面の表示領域）の上から5%の位置。
+    right: 5%; //ビューポート（画面の表示領域）の右から5%の位置。
+    width: 30px; //幅30pxで３本線の領域の指定。
+    height: 30px; //高さ30pxで３本線の領域の指定。
+    display: flex; //spanを３本線の真ん中の線にするので、領域ないの中央に配置させるため。
+    align-items: center; //縦軸の真ん中に。これでspanの３本線を領域ないの中央に配置させる。
+    z-index: 3; //数字は1でもいい。backdrop-filter: blur(4px); で３本線のボタンもぼけているので一番手前に持ってくる。
+
+    //３本線の作成
+    span {
+      //まずspanの文字を視覚的に消す。（非表示にする）
+      text-indent: 100%; //spanのテキストを隠す。(indent＝スペース)を100％にすることでスペースが入りまくって右にずれて枠外に消える。
+      white-space: nowrap; ///折り返しさせない。枠外に消えたけど文字の折り返しで戻って来ない用にする。
+      display: block; //上記の指定はspanのインラインでは効かないのでブロック要素に変換する。
+      overflow: hidden; //非表示にする。spanの文字を非表示にする。
+      height: 2px; //線の高さのサイズ
+      width: 100%; //線の幅のサイズ
+      background-color: #ccc; //線の色
+      transition: opacity 0.3s;
     }
 
-    //３本線のボタン作成ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-    //３本線の配置と領域の指定
-    &-btn {
-      position: fixed; //ビューポート（画面の表示領域）に対して固定。要素を一番上に配置するため。
-      top: 5%; //ビューポート（画面の表示領域）の上から5%の位置。
-      right: 5%; //ビューポート（画面の表示領域）の右から5%の位置。
-      width: 30px; //幅30pxで３本線の領域の指定。
-      height: 30px; //高さ30pxで３本線の領域の指定。
-      display: flex; //spanを３本線の真ん中の線にするので、領域ないの中央に配置させるため。
-      align-items: center; //縦軸の真ん中に。これでspanの３本線を領域ないの中央に配置させる。
-      z-index: 2; //数字は1でもいい。backdrop-filter: blur(4px); で３本線のボタンもぼけているので一番手前に持ってくる。
+    //3本線の2本の線の作成-------------------------------------------------------
+    &::before,
+    &::after {
+      content: "";
+      height: 2px; //線の高さのサイズ
+      width: 100%; //線の幅のサイズ
+      background-color: #ccc; //線の色
+      position: absolute; //２本の線を下、上にずらすため浮かせる。今回はすでに親にposition: fixed;が掛かっているので基準にしたい親にposition: relative;を掛ける必要はない。
 
-      //３本線の作成
-      span {
-        //まずspanの文字を視覚的に消す。（非表示にする）
-        text-indent: 100%; //spanのテキストを隠す。(indent＝スペース)を100％にすることでスペースが入りまくって右にずれて枠外に消える。
-        white-space: nowrap; ///折り返しさせない。枠外に消えたけど文字の折り返しで戻って来ない用にする。
-        display: block; //上記の指定はspanのインラインでは効かないのでブロック要素に変換する。
-        overflow: hidden; //非表示にする。spanの文字を非表示にする。
-        height: 2px; //線の高さのサイズ
-        width: 100%; //線の幅のサイズ
-        background-color: #ccc; //線の色
-      }
-
-      //3本線の2本の線の作成-------------------------------------------------------
-      &::before,
-      &::after {
-        content: "";
-        height: 2px; //線の高さのサイズ
-        width: 100%; //線の幅のサイズ
-        background-color: #ccc; //線の色
-        position: absolute; //２本の線を下、上にずらすため浮かせる。今回はすでに親にposition: fixed;が掛かっているので基準にしたい親にposition: relative;を掛ける必要はない。
-
-        //position: fixed;で２本とも中央に来ていて被っているが、完全に中央にする。top: 50%; これで領域から50%で線の上辺が領域の中央と重なるが線自体は中央よりか少し下になるので、transform: translateY(-50%);`で領域の中央と線の中央が合う様になる。
-        top: 50%; //これでYなので縦に動いて領域から50%で線の上辺が領域の中央と重なる
-        transform: translateY(-50%); //Yなので縦に動いて領域の中央と線の中央が合う様になる。
-        transition: transform 0.3s; //3本線がバツになるときの動きの指定
-      }
-
-      //2本のそれぞれをずらしていく指定
-      //1本目
-      &::before {
-        transform: translateY(calc(-50% - 10px)); //-50%は中央に持ってきて- 10pxでマイナス値でさらに上にずらす。
-      }
-
-      //2本目
-      &::after {
-        transform: translateY(calc(-50% + 10px)); //-50%は中央に持ってきて+ 10pxでさらに下にずらす。
-      }
+      //position: fixed;で２本とも中央に来ていて被っているが、完全に中央にする。top: 50%; これで領域から50%で線の上辺が領域の中央と重なるが線自体は中央よりか少し下になるので、transform: translateY(-50%);`で領域の中央と線の中央が合う様になる。
+      top: 50%; //これでYなので縦に動いて領域から50%で線の上辺が領域の中央と重なる
+      transform: translateY(
+        -50%
+      ); //Yなので縦に動いて領域の中央と線の中央が合う様になる。
+      transition: transform 0.3s; //3本線がバツになるときの動きの指定
     }
 
-    // チェック入ったときにナビゲーションが開く設定
-    &-toggler:checked~& {
-      //display: flex;
-      width: 100px; //上の132行のとこでナビゲーションのは高さ幅を無くしてさらに非表示にしているのでチェック入ったときに画面にいっぱいにする。
-      height: 100px; //上の132行のとこでナビゲーションのは高さ幅を無くしてさらに非表示にしているのでチェック入ったときに画面にいっぱいにする。
-      overflow: auto; //上の132行のとこでナビゲーションのは高さ幅を無くしてさらに非表示にしているのでチェック入ったときに表示させる。
-      opacity: 1;
-      z-index: 1;
-    }
-
-    // ボタンを押した時に３本線がバツに変わる指定ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+    //2本のそれぞれをずらしていく指定
     //1本目
-    //&-togglerにcheckedが入ったときの兄弟の&-btn spanということ。
-    &-toggler:checked~&-btn span {
-      opacity: 0; //ボタンが押された時にまずspanの真ん中線が透明になって消えているようにする。
-      transition: opacity 0.3s; //押した時にふわっと消えるようにする。
+    &::before {
+      transform: translateY(
+        calc(-50% - 10px)
+      ); //-50%は中央に持ってきて- 10pxでマイナス値でさらに上にずらす。
     }
 
     //2本目
-    &-toggler:checked~&-btn::before {
-      transform: translateY(-50%) rotate(45deg); //translateY(-50%)でまず位置を中央に戻すしてrotate(45deg)で回転。
-      //押した時にふわっと消えるようにする。
-      background-color: var(--text);
+    &::after {
+      transform: translateY(
+        calc(-50% + 10px)
+      ); //-50%は中央に持ってきて+ 10pxでさらに下にずらす。
     }
+  }
 
-    //3本目
-    &-toggler:checked~&-btn::after {
-      transform: translateY(-50%) rotate(-45deg); //translateY(-50%)でまず位置を中央に戻すしてrotate(-45deg)で回転。
-      background-color: var(--text);
-    }
+  // チェック入ったときにナビゲーションが開く設定
+  &-toggler:checked ~ & {
+    // display: flex;
+    width: 100%; //上の132行のとこでナビゲーションのは高さ幅を無くしてさらに非表示にしているのでチェック入ったときに画面にいっぱいにする。
+    height: 100%; //上の132行のとこでナビゲーションのは高さ幅を無くしてさらに非表示にしているのでチェック入ったときに画面にいっぱいにする。
+    overflow: auto; //上の132行のとこでナビゲーションのは高さ幅を無くしてさらに非表示にしているのでチェック入ったときに表示させる。
+    opacity: 1;
+    z-index: 2;
+  }
 
-    //PCの設定(ナビゲーションの設定)＝＝＝＝＝＝＝＝＝＝＝
-    @include mq {
-      width: 100%;
-      height: auto;
-      overflow: auto;
-      opacity: 1;
-      z-index: initial; //SPのときの一番後ろから初期値で元に戻す。
-      border: blur(0px); //SPのときのぼかしを消す。
-      background-color: transparent; //SPのときの背景色を初期値で消す。
-      display: block; //ブロックにしてSPのdisplay: flex;を消す。
-      padding: 1rem 0; //項目がサイトページの上にくっついてるのを余白で下に下げる。
+  // ボタンを押した時に３本線がバツに変わる指定ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+  //1本目
+  //&-togglerにcheckedが入ったときの兄弟の&-btn spanということ。
+  &-toggler:checked ~ &-btn span {
+    opacity: 0; //ボタンが押された時にまずspanの真ん中線が透明になって消えているようにする。
+    transition: opacity 0.3s; //押した時にふわっと消えるようにする。
+  }
 
+  //2本目
+  &-toggler:checked ~ &-btn::before {
+    transform: translateY(-50%) rotate(45deg); //translateY(-50%)でまず位置を中央に戻すしてrotate(45deg)で回転。
+    //押した時にふわっと消えるようにする。
+    background-color: var(--text);
+  }
 
+  //3本目
+  &-toggler:checked ~ &-btn::after {
+    transform: translateY(-50%) rotate(-45deg); //translateY(-50%)でまず位置を中央に戻すしてrotate(-45deg)で回転。
+    background-color: var(--text);
+  }
 
-      ul {
-        max-width: 1200px;
-        margin-left: auto; //中央揃え
-        margin-right: auto; //中央揃え
-        display: flex; //liが横並び
-        justify-content: flex-end; //liの項目をul内の右寄せ
+  //PCの設定(ナビゲーションの設定)＝＝＝＝＝＝＝＝＝＝＝
+  @include mq {
+    width: 100%;
+    height: auto;
+    overflow: auto;
+    opacity: 1;
+    z-index: 2; //SPのときの一番後ろから初期値で元に戻す。
+    backdrop-filter: blur(0px); //SPのときのぼかしを消す。
+    background-color: transparent; //SPのときの背景色を初期値で消す。
+    display: block; //ブロックにしてSPのdisplay: flex;を消す。
+    padding: 1rem 0; //項目がサイトページの上にくっついてるのを余白で下に下げる。
 
-        li {
-          &:not(:first-child) {
-            margin-top: 0; //SPの時の1つ目以外の項目に余白をつけたのを打ち消し。
-            margin-left: 4rem; //項目の間を開ける。
-          }
+    ul {
+      max-width: 1200px;
+      margin-left: auto; //中央揃え
+      margin-right: auto; //中央揃え
+      display: flex; //liが横並び
+      justify-content: flex-end; //liの項目をul内の右寄せ
 
-          a {
-            font-size: 1rem; //フォントサイズを元に戻す。(1rem=16px)
-            width: auto; //箱のサイズを文字の量に対しての幅にする。これで箱も小さくなる。
-            padding-bottom: 0; //
-            color: var(--primary);
-            text-shadow: 0 0 5px #ccc; //これで項目に陰を作って背景の画像に見た目が負けない様にする。
+      li {
+        &:not(:first-child) {
+          margin-top: 0; //SPの時の1つ目以外の項目に余白をつけたのを打ち消し。
+          margin-left: 4rem; //項目の間を開ける。
+        }
 
-            //ストライプ型の下線を消す。
-            &::after {
-              content: none; //これで作った下線を打ち消し。
-            }
+        a {
+          font-size: 1rem; //フォントサイズを元に戻す。(1rem=16px)
+          width: auto; //箱のサイズを文字の量に対しての幅にする。これで箱も小さくなる。
+          padding-bottom: 0; //
+          color: var(--primary);
+          text-shadow: 0 0 5px #ccc; //これで項目に陰を作って背景の画像に見た目が負けない様にする。
 
+          //ストライプ型の下線を消す。
+          &::after {
+            content: none; //これで作った下線を打ち消し。
           }
         }
       }
-
-      //３本線のボタンの設定
-      &-btn {
-        display: none; //PCの画面では３本線のボタンは消す。600pxまで画面幅を小さくすると表示される。
-      }
     }
-  } // .global-nav 
 
-  //メインビジュアルの指定ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-  .mv {
-    height: 85vh; //画面サイズに対して常に高さが85％
+    //３本線のボタンの設定
+    &-btn {
+      display: none; //PCの画面では３本線のボタンは消す。600pxまで画面幅を小さくすると表示される。
+    }
+  }
+} //.global-nav
 
-    // slickの指定
+//メインビジュアルの指定ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+.mv {
+  // height: 85vh; //画面サイズに対して常に高さが85％
+  // height: 85dvh;
+  height: 85svh;
+
+  // slickの指定
   .slick-list,
   .slick-track {
     height: 100%; //slickは元々高さの指定がされていないのでslickを入れたときmvの大きさが小さくなるので高さを戻す。
   }
-// メインビジュアルの下をカーブさせる方法。擬似要素で中に背景画像を登場させて同じ画像を使って重ねてカーブのところを作る。
-    &__panel {
-      // メインビジュアルの画像の下をカーブさせる方法。　でもこれは微妙なので自分でfigmaで形を作成したsvg画像を使ってマスク機能のやる。
-      // border-bottom-right-radius: 50% 30px; //角丸
-      // border-bottom-left-radius: 50% 30px; //角丸
-      // overflow: hidden;
+  // メインビジュアルの下をカーブさせる方法。擬似要素で中に背景画像を登場させて同じ画像を使って重ねてカーブのところを作る。
+  &__panel {
+    // メインビジュアルの画像の下をカーブさせる方法。　でもこれは微妙なので自分でfigmaで形を作成したsvg画像を使ってマスク機能のやる。
+    // border-bottom-right-radius: 50% 30px; //角丸
+    // border-bottom-left-radius: 50% 30px; //角丸
+    // overflow: hidden;
+    height: 100%;
+    position: relative;
+    filter: brightness(70%); //mvの明るさを下げてロゴなどを見やすくする。
+
+    //元の画像の指定
+    img {
+      clip-path: inset(
+        0 0 15px 0
+      ); //(時計回り); clip-pathは対象の要素の(時計回り);で指定した範囲をカットする機能。なのでこの場合画像のしたから15px分の部分を切ったということ。
+      width: 100%;
       height: 100%;
-      position: relative;
-      filter: brightness(70%); //mvの明るさを下げてロゴなどを見やすくする。
-      
-      //元の画像の指定
-      img {
-        clip-path: inset(0 0 15px 0); //(時計回り); clip-pathは対象の要素の(時計回り);で指定した範囲をカットする機能。なのでこの場合画像のしたから15px分の部分を切ったということ。
-        width: 100%;
-        height: 100%;
-        object-fit: cover; //画像の比率を保つ
-        // object-position: center center; //初期値で書かなくてもこの状態。なので下の擬似要素の画像の表示の統合をとっている。background: var(--image) no-repeat center center;ここの部分。
-      }
-
-      //擬似要素で中に背景画像を登場させて同じ画像を使って重ねてカーブのところを作る。これはHTMLの方で変数でstyleをもたしてるやつ。
-      &::after {
-        content: "";
-        background: var(--image) no-repeat center center; //擬似要素の中に背景画像を登場させてHTMLの方でstyleをもたして変数を使う。
-        mask-image: url(../img/curve.svg); //マスク機能　url(../img/curve.svg)はfigmaで作ったマスクをかけたいsvg画像
-        mask-repeat: no-repeat; //上記のマスク機能呼び出すと初期値でマスクの画像がリピートで表示されるので1個だけにする。
-        mask-position: center bottom; // (X)(Y); 対象の画像全体にマスクがかかっていのでかけたい位置を指定。
-        mask-size: 100% calc(15px + 0.08%); //(X)(Y);サイズの指定。(Y)の部分はマスクと元の画像のカットした部分を綺麗に合わせる細かい指定。ただこれはsvgのコードにある(viewBox="0 0 100 15")を消す必要がある。このコードはsvg画像の縦横比を保って形を崩さない指定なのでこれがあるとサイズの指定で形が変えられない。
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        bottom: 0;
-        left: 0;
-      }
-      }
-  }
-
-  //ロゴの配置の指定ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
-  //ロゴの配置のための基準
-  .site-header {
-    position: relative; //これでmvの領域内の中でロゴが自由に動ける。
-  }
-  
-//ロゴの配置
-  .site-logo {
-    position: absolute;
-    z-index: 1; //後ろに隠れているので前に出す。
-    bottom: 25%;  //これでmvの領域の下から25％の位置に配置。
-    left: 0;
-  
-    //ロゴについてるキャッチコピーのテキスト
-    p {
-      color: #fff;
-      text-align: center; //テキストが中央に配置
+      object-fit: cover; //画像の比率を保つ
+      // object-position: center center; //初期値で書かなくてもこの状態。なので下の擬似要素の画像の表示の統合をとっている。background: var(--image) no-repeat center center;ここの部分。
     }
-  }
-  
-  // スクロールを促すアニメーションがかかったイラストみたいなやつの作成
-  .scroll-indicator {
-    position: absolute;
-    bottom: 10%;
-    left: 50%;
-    transform: translateX(-50%) rotate(90deg);
-    color: #fff;
-    font-size: 0.8rem;
-    z-index: 1;
-    animation: scroll-indicator 1s infinite;
-  
-    //矢印の縦棒の作成
-    &::before {
-      content: "";
-      height: 1px;
-      width: 110%; //＋10％で棒を少し長くする。
-      position: absolute;
-      top: 0;
-      left: 0;
-      background-color: #fff;
-    }
+
+    //擬似要素で中に背景画像を登場させて同じ画像を使って重ねてカーブのところを作る。これはHTMLの方で変数でstyleをもたしてるやつ。
     &::after {
       content: "";
+      background: var(--image) no-repeat center center; //擬似要素の中に背景画像を登場させてHTMLの方でstyleをもたして変数を使う。
+      mask-image: url(../img/curve.svg); //マスク機能　url(../img/curve.svg)はfigmaで作ったマスクをかけたいsvg画像
+      mask-repeat: no-repeat; //上記のマスク機能呼び出すと初期値でマスクの画像がリピートで表示されるので1個だけにする。
+      mask-position: center bottom; // (X)(Y); 対象の画像全体にマスクがかかっていのでかけたい位置を指定。
+      mask-size: 100% calc(15px + 0.08%); //(X)(Y);サイズの指定。(Y)の部分はマスクと元の画像のカットした部分を綺麗に合わせる細かい指定。ただこれはsvgのコードにある(viewBox="0 0 100 15")を消す必要がある。このコードはsvg画像の縦横比を保って形を崩さない指定なのでこれがあるとサイズの指定で形が変えられない。
       position: absolute;
-      width: 10px;
-      height: 1px;
-      top: 0;
-      right: -10%;
-      background: #fff;
-      transform: rotate(30deg);
-      transform-origin: right bottom;
+      width: 100%;
+      height: 100%;
+      bottom: 0;
+      left: 0;
+    }
+    img {
+      width: 100%;
+      height: 100%;
     }
   }
-  
-  @keyframes scroll-indicator {
-    0%,
-    100% {
-      transform: translateY(0) translateX(-50%) rotate(90deg);
-    }
-    50% {
-      transform: translateY(15px) translateX(-50%) rotate(90deg);
+}
+
+//ロゴの配置の指定ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+//ロゴの配置のための基準
+.site-header {
+  position: relative; //これでmvの領域内の中でロゴが自由に動ける。
+}
+
+//ロゴの配置
+.site-logo {
+  position: absolute;
+  z-index: 1; //後ろに隠れているので前に出す。
+  bottom: 25%; //これでmvの領域の下から25％の位置に配置。
+  left: 0;
+
+  //ロゴについてるキャッチコピーのテキスト
+  p {
+    color: #fff;
+    text-align: center; //テキストが中央に配置
+  }
+}
+
+// スクロールを促すアニメーションがかかったイラストみたいなやつの作成
+.scroll-indicator {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%) rotate(90deg); //回転90度かけて → から　↓ にする。
+  color: #fff;
+  font-size: 0.8rem;
+  z-index: 1;
+  animation: scroll-indicator 1s infinite; //作成たアニメーションの@keyframes scroll-indicator{}の実行。動きの時間が1sで1秒にして、infiniteでずっと繰り返しさせる。
+
+  //矢印の横棒の作成
+  &::before {
+    content: "";
+    height: 1px;
+    width: 110%; //＋10％で棒を少し長くする。
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+  }
+  //矢印の斜めの棒の作成
+  &::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 1px;
+    top: 0;
+    right: -10%; //beforeの横棒の右端に位置をあわせる
+    background: #fff;
+    transform: rotate(
+      30deg
+    ); //角度を変えて斜めにする。矢印の斜めの部分。 transform: rotate()は要素の中心点を基準に回転している。
+    transform-origin: right bottom; //棒の回転の基準点を右下に指定。これで横棒の右端に合わせて重なっているので矢印ぽっくなる。上記のtransform: rotate()は通常、要素の中心点を基準に回転するので、基準点をtransform-originで変える。
+  }
+}
+
+// 矢印が跳ねているアニメーションの指定
+@keyframes scroll-indicator {
+  0%,
+  100% {
+    transform: translateY(0) translateX(-50%) rotate(90deg); //初期の位置, translateX(-50%)は場所をずらすためのもの, rotate(90deg)
+  }
+  50% {
+    transform: translateY(15px) translateX(-50%) rotate(90deg); //15px分下の位置, translateX(-50%)は場所をずらすためのもの, rotate(90deg)
+  }
+}
+
+// イントロダクション　mainのセクション　ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+.introduction {
+  margin-top: 100px; //セクション自体の上の余白
+  padding-bottom: 50px; //セクション自体の下の余白
+
+  // .introduction内のh2のスタイル
+  &__head {
+    font-size: 1.5rem;
+    font-weight: normal;
+    margin-bottom: 50px;
+  }
+
+  &__img {
+    img {
+      width: 50%;
+      margin-left: auto;
     }
   }
-  
-  // イントロダクション
-  .introduction {
-    margin-top: 100px;
-    padding-bottom: 50px;
-  
-    &__head {
-      font-size: 1.5rem;
-      font-weight: normal;
-      margin-bottom: 50px;
+
+  // PC =====
+  @include mq {
+    &__container {
+      display: flex;
     }
-  
+
+    &__text {
+      flex-basis: 65%;
+      flex-shrink: 0;
+    }
+
+    &__lead {
+      max-width: 25rem;
+    }
+
     &__img {
       img {
-        width: 50%;
-        margin-left: auto;
+        width: auto;
+        margin-left: 0;
       }
     }
-  
-    // PC =====
-    @include mq {
-      &__container {
-        display: flex;
+  }
+} //.introduction
+
+// ニュース
+.news {
+  &__list {
+    overflow: hidden;
+    li {
+      &:not(:first-child) {
+        margin-top: 50px;
       }
-  
-      &__text {
-        flex-basis: 65%;
-        flex-shrink: 0;
+
+      a {
+        background: #333;
+        text-align: center;
+        display: block;
       }
-  
-      &__lead {
-        max-width: 25rem;
+
+      a img {
+        transition: 0.3s;
       }
-  
-      &__img {
-        img {
-          width: auto;
-          margin-left: 0;
-        }
+
+      a:hover img {
+        filter: brightness(90%);
       }
     }
-  } //.introduction
-  
-  // ニュース
-  .news {
+  }
+
+  &__img {
+    margin-top: 50px;
+
+    img {
+      width: 50%;
+      margin-right: auto;
+    }
+  }
+
+  // PC =====
+  @include mq {
     &__list {
+      display: flex;
+      gap: 5%;
+      // justify-content: space-between;
+
       li {
+        flex-basis: 33.333%;
+        // flex-basis: 30%;
+
         &:not(:first-child) {
-          margin-top: 50px;
-        }
-  
-        a {
-          background: #333;
-          text-align: center;
-          display: block;
-        }
-  
-        a img {
-          transition: 0.3s;
-        }
-  
-        a:hover img {
-          filter: brightness(90%);
+          margin-top: 0;
         }
       }
-    }
-  
+    } //list
+
     &__img {
-      margin-top: 50px;
-  
       img {
-        width: 50%;
+        width: 30%;
+        translate: -20% 0;
+      }
+    }
+  }
+} //.news
+// イベント（今月のお花教室）
+.event {
+  &__container {
+    > div:first-child {
+      margin-bottom: 60px;
+    }
+  }
+
+  &-article {
+    &__img {
+      margin-bottom: 2rem;
+    }
+
+    &__head {
+      font-weight: normal;
+      border-bottom: 1px dotted var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    &__text {
+      max-width: 400px;
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__btn-area {
+    text-align: center;
+  }
+
+  // PC =====
+  @include mq {
+    &__container {
+      display: flex;
+      // justify-content: space-between;
+      gap: 10%;
+
+      > div {
+        // width: 45%;
+        flex-basis: 50%;
+      }
+    }
+
+    &-article {
+      &__img {
+        width: 65%;
+        margin-left: auto;
         margin-right: auto;
       }
     }
-  
-    // PC =====
-    @include mq {
-      &__list {
-        display: flex;
-        gap: 5%;
-        // justify-content: space-between;
-  
-        li {
-          flex-basis: 33.333%;
-          // flex-basis: 30%;
-  
-          &:not(:first-child) {
-            margin-top: 0;
-          }
-        }
-      } //list
-  
-      &__img {
-        img {
-          width: 30%;
-          translate: -20% 0;
-        }
+  }
+} //.event
+
+// 店舗情報
+.access {
+  &__container {
+    > div:first-child {
+      margin-bottom: 60px;
+    }
+  }
+
+  &__shopinfo {
+    dd {
+      font-size: 1.125rem;
+      border-bottom: 1px dotted var(--primary);
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &__map {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    height: auto;
+  }
+
+  &__contact {
+    text-align: center;
+    margin-top: 60px;
+  }
+
+  // PC =====
+  @include mq {
+    &__container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      > div:first-child {
+        width: 40%;
+      }
+
+      > div:nth-child(2) {
+        width: 300px;
       }
     }
-  } //.news
+  }
+}
+
+// フッター
+.site-footer {
+  padding-top: 50px;
+  padding-bottom: 20px;
+
+  .pagetop {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 50px;
+
+    img {
+      width: 50px;
+    }
+  }
+
+  &__logo {
+    img {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  .copyright {
+    display: block;
+    text-align: center;
+  }
+}

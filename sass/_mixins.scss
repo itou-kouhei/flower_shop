@@ -1,5 +1,5 @@
 @mixin mq {
-    @media screen and (min-width: 600px) {
-        @content;
-    }
+  @media screen and (min-width: 600px) {
+    @content;
+  }
 }
