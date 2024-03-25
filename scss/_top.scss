@@ -1,5 +1,7 @@
 @use "./mixins" as *;
 
+//このサイトはモバイルファーストでコーディングしている＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
 // 共通設定ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 *,
 *::before,
@@ -9,6 +11,7 @@
   box-sizing: border-box;
 }
 
+// フッターにあるページトップへのボタンを押したときのトップに戻るアクションをスムーズにする。
 html {
   scroll-behavior: smooth;
 }
@@ -54,15 +57,16 @@ ol {
   padding-top: 100px;
   padding-bottom: 50px;
 
+  //見出し
   &__head {
     width: 250px;
     padding-bottom: 8px; //見出しの下に16pxの余白
     position: relative;
     text-align: center; //箱の中で文字が中央に配置される
     font-weight: normal; //元々太字のフォントなので文字の太さを普通にする
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 2rem;
+    margin-left: auto; //位置を中央にするため。
+    margin-right: auto; //位置を中央にするため。
+    margin-bottom: 2rem; //見出しの下のコンテンツとの余白
 
     // 擬似要素で見出しのスタライブ方の下線をつくる
     &::after {
@@ -123,26 +127,56 @@ ol {
   }
 }
 
-.bg-inbetween {
-  height: 55vh;
-  position: relative;
+// スクロールしてる時の後ろの背景画像の固定のスタイル　ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 
+// 画像の表示領域
+.bg-inbetween {
+  height: 55vh; // 画像の表示領域の指定。高さを画面の幅に対して55vh。
+  position: relative; //切り抜く際のマスク用のdivタグのために親にする。
+
+  // 切り抜く際のマスク用のdivタグ
   &__inner {
+    /* 
+    ここでは上記の表示領域(.bg-inbetween)と同じ大きさにしてマスクをかける。
+　　 なので上記の表示領域(.bg-inbetween)にposition: relative;をかけて改めて親に指定して、width: 100%;・height: 100%;で同じ大きさにする。
+    そしてleft: 0;、top: 0;で同じ位置にする。
+    これで同じ大きさで同じ位置になる。
+    
+    でclip-path: inset(0 0 0 0);でマスクをかける。
+    内訳は(上 右 下 左);　これはマスクをかける範囲を指定できる。
+    なので今回は (0 0 0 0);で親要素と同じサイズ。
+    数字を入れれば親要素からの距離がその文開いてマスクの範囲が小さくなる。
+    */
     position: absolute;
     width: 100%;
     height: 100%;
     left: 0;
     top: 0;
-    clip-path: inset(0 0 0 0);
+    clip-path: inset(
+      0 0 0 0
+    ); // 親要素と同じサイズでマスクをかける。 内訳は(上 右 下 左);
   }
 
+  //対象の背景画像
   img {
-    position: fixed;
+    /* 
+    ここでは画像を画面幅いっぱいにしてとウィンドウの同じ大きさにして固定させる。
+    それに寄ってマスクで表示領域のもった要素がスクロールでこの背景画像を舐める仕組でできる。
+    なのでまずで固定はposition: fixed;でして、ウィンドウと同じ大きさはwidth: 100%;、height: 100%;で同じ大きさにする。
+    これでウィンドウの画面幅いっぱいの同じ大きさでかつ固定される。
+    
+    次にここがポイントで、width: 100%;とheight: 100%;でウィンドウの画面幅いっぱいの同じ大きさにすると画像は歪むので、
+    object-fit: cover;　をすると歪まなくなる。
+    
+    そして最後に　top: 0;、left: 0;　で固定する位置を指定して、
+    これでウィンドウの画面幅全体に表示されたので、あとは上記の対象の要素に、clip-path: inset(0 0 0 0);（マスク）をかける。
+    */
+    position: fixed; //画像の固定
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    top: 0;
-    left: 0;
+    object-fit: cover; // ウィンドウに対して画像の大きくすると画像が歪むので歪まない様にする。
+    top: 0; //位置
+    left: 0; //位置
   }
 }
 
@@ -209,6 +243,7 @@ ol {
       }
     }
   }
+
   // チェックボックス
   &-toggler {
     display: none; //要素を消す
@@ -348,19 +383,22 @@ ol {
       display: none; //PCの画面では３本線のボタンは消す。600pxまで画面幅を小さくすると表示される。
     }
   }
-} //.global-nav
+}
+
+//.global-nav
 
 //メインビジュアルの指定ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 .mv {
   // height: 85vh; //画面サイズに対して常に高さが85％
   // height: 85dvh;
-  height: 85svh;
+  height: 85svh; //svhだとスクロールでアドレスバーが隠れて画像が大きくなるのを、隠れてもメインビジュアルの画像のサイズが変わらないようにすることが可能。
 
   // slickの指定
   .slick-list,
   .slick-track {
     height: 100%; //slickは元々高さの指定がされていないのでslickを入れたときmvの大きさが小さくなるので高さを戻す。
   }
+
   // メインビジュアルの下をカーブさせる方法。擬似要素で中に背景画像を登場させて同じ画像を使って重ねてカーブのところを作る。
   &__panel {
     // メインビジュアルの画像の下をカーブさせる方法。　でもこれは微妙なので自分でfigmaで形を作成したsvg画像を使ってマスク機能のやる。
@@ -396,6 +434,7 @@ ol {
       bottom: 0;
       left: 0;
     }
+
     img {
       width: 100%;
       height: 100%;
@@ -444,6 +483,7 @@ ol {
     left: 0;
     background-color: #fff;
   }
+
   //矢印の斜めの棒の作成
   &::after {
     content: "";
@@ -466,6 +506,7 @@ ol {
   100% {
     transform: translateY(0) translateX(-50%) rotate(90deg); //初期の位置, translateX(-50%)は場所をずらすためのもの, rotate(90deg)
   }
+
   50% {
     transform: translateY(15px) translateX(-50%) rotate(90deg); //15px分下の位置, translateX(-50%)は場所をずらすためのもの, rotate(90deg)
   }
@@ -480,46 +521,59 @@ ol {
   &__head {
     font-size: 1.5rem;
     font-weight: normal;
-    margin-bottom: 50px;
+    margin-bottom: 50px; //下の分との余白
   }
 
+  //花の画像
   &__img {
     img {
-      width: 50%;
-      margin-left: auto;
+      width: 50%; //spの時の花の画像が画面の半分の大きさなので、モバイルファーストで指定しているので画像自体の幅を50にして再現。
+      margin-left: auto; //画面の左に位置しているので右余白をautoして画面の右に移動させる。
     }
   }
 
   // PC =====
   @include mq {
+    // PCのときは文と画像が横並びの２カラムにする
     &__container {
-      display: flex;
+      display: flex; //これで文と画像が横並びになる。
     }
 
+    // テキストエリア
     &__text {
-      flex-basis: 65%;
-      flex-shrink: 0;
+      flex-basis: 65%; //画面に対して65%のエリア
+      flex-shrink: 0; //flex-basisを使うとコンテナの内容に寄って大きさが変わるので、テキストの量に寄って横の画像が縮まない様にできる。
     }
 
+    // リード文
     &__lead {
-      max-width: 25rem;
+      max-width: 25rem; //文字の大きさを指定。間延びしない様に幅制限のため。
     }
 
+    // 花の画像
     &__img {
       img {
-        width: auto;
-        margin-left: 0;
+        width: auto; //画像のサイズを戻す
+        margin-left: 0; //先ほど指定していた余白の打ち消し
       }
     }
   }
-} //.introduction
+}
 
-// ニュース
+//.introduction
+
+// ニュース　ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 .news {
   &__list {
-    overflow: hidden;
+    overflow: hidden; //親の箱から画像がはみ出して横スクロールバーが出ちゃうのではみ出した部分を隠して横スクロールバーを消す。
+
+    // リスト
     li {
       &:not(:first-child) {
+        /*
+      &:not(:first-child)　はリストの2個目3個目も同じという意味。
+      モバイルの画面でリストは縦並びになるのでそれぞれの間の余白を設ける指定。
+      */
         margin-top: 50px;
       }
 
@@ -529,172 +583,215 @@ ol {
         display: block;
       }
 
+      // リストの画像
       a img {
-        transition: 0.3s;
+        transition: 0.3s; //0.3秒のアニメーションを付与。これで下のホバーした時の明るさを落とす挙動が0.3秒でふっわとした感じでされる。
       }
 
+      // リストの画像をホバーしたとき
       a:hover img {
-        filter: brightness(90%);
+        filter: brightness(90%); //画像にホバーした時の明るさを落とす。
       }
     }
   }
 
+  // 花画像
   &__img {
-    margin-top: 50px;
+    margin-top: 50px; //この画像が入ってる箱は上のコンテンツとの余白を設ける。
 
     img {
-      width: 50%;
-      margin-right: auto;
+      width: 50%; //50%で拡縮させる。
+      margin-right: auto; //左寄せ
     }
   }
 
   // PC =====
   @include mq {
     &__list {
-      display: flex;
-      gap: 5%;
-      // justify-content: space-between;
+      display: flex; //SPの時のリストの縦並びを横並びにする。
+      /*
+      gapは column-gap: ;(縦並びの時の余白) と row-gap: ;(横並びの時の余白)　の２つがある。
+      なので　gap　だけだと両方の余白を指定できる。
+      */
+      gap: 5%; //3つの画像の余白を作成。flex内のコンテンツ同士の余白は gap: ; が余白の機能。
+      // justify-content: // space-between; これは下の３つのサイズの幅を flex-basis: 30%; で指定した場合のときの余白の作り方。
 
       li {
-        flex-basis: 33.333%;
+        /*
+        flexを使うと中身のコンテンツは内容によってサイズが自動で決まるので、 display: flex; で横並びになったが、中の３つの画像はサイズがぞれぞれ違うので崩れて横並びになっているので、綺麗に３当分で並べるためにサイズの幅を指定する。
+
+        flex-basis: 30%; こっちの３当分で30%で３つのサイズの幅を指定したら、
+        ３つの間の余白は上記の &__list内で justify-content: space-between;　でスペースを空けるやり方でも同じレイアウトになる。
+        */
+        flex-basis: 33.333%; //３つのサイズの幅を指定。　これで綺麗な３当分で横並びになる。
         // flex-basis: 30%;
 
+        /*
+        上記のSPの指定のときに モバイルの画面でリストは縦並びになるのでそれぞれの間の余白を設ける指定を  &:not(:first-child)　でしたので、
+        今３つのリストの上辺が１つだけずれているので、上記のSPの指定を打ち消して揃える。
+        */
         &:not(:first-child) {
           margin-top: 0;
         }
       }
     } //list
 
+    //花の画像
     &__img {
       img {
-        width: 30%;
-        translate: -20% 0;
+        width: 30%; //サイズの大きさ
+        translate: -20% 0; //右にずらす。ウィンドウの右端に位置させたい。
       }
     }
   }
 } //.news
-// イベント（今月のお花教室）
+
+// イベント（今月のお花教室） ------------------------------------------------------------------------------------------------------
 .event {
   &__container {
+// > div:first-child これは、まず > が直属の子要素を指すので、.event__containerの中にある最初のdivという指定。
     > div:first-child {
-      margin-bottom: 60px;
+      margin-bottom: 60px; ////PCの時には２カラムになる２カラム目との余白
     }
   }
 
   &-article {
+    //画像
     &__img {
-      margin-bottom: 2rem;
+      margin-bottom: 2rem; //画像の下のテキストとの余白。　2remは×2ということ。なのでベースの16px × 2　で36px。
     }
 
+    //見出し
     &__head {
       font-weight: normal;
-      border-bottom: 1px dotted var(--primary);
-      margin-bottom: 1rem;
+      border-bottom: 1px dotted var(--primary); //下線。 dottedは点線の指定。
+      margin-bottom: 1rem; //下の文との余白をたって見出し感を作る。
     }
 
+    //テキスト文
     &__text {
-      max-width: 400px;
-      margin-bottom: 2rem;
+      max-width: 400px; //テキスト文の幅を400pxまでに制限
+      margin-bottom: 2rem; //下のボタンとの余白
     }
   }
 
+  // ボタン
   &__btn-area {
-    text-align: center;
+    text-align: center; // 画面の中央寄せ
   }
 
   // PC =====
   @include mq {
     &__container {
-      display: flex;
-      // justify-content: space-between;
-      gap: 10%;
+      display: flex; //PCでは２カラムにするので横並びにする。
+      // justify-content: space-between; //カラムの間のスペース。こっちでも同じ。
+      gap: 10%; //カラムの間のスペース
 
       > div {
-        // width: 45%;
-        flex-basis: 50%;
+        // width: 45%; //1カラムずつの幅を制限。間のスペース分を計算して、1カラムずつの幅を指定。こっちでも同じ。
+        flex-basis: 50%; //1カラムずつの幅を制限。間のスペース分を計算して、1カラムずつの幅を指定。
       }
     }
 
+    
     &-article {
+      //画像の指定
       &__img {
-        width: 65%;
-        margin-left: auto;
-        margin-right: auto;
+        width: 65%; //画像のサイズ指定。親の箱の中で65%の大きさ。
+        margin-left: auto; //画像を中央寄せ
+        margin-right: auto; //画像を中央寄せ
       }
     }
   }
 } //.event
 
-// 店舗情報
+
+
+// 店舗情報 ------------------------------------------------------------------------------------------------------------------
 .access {
+  // > div:first-child これは、まず > が直属の子要素を指すので、.access__containerの中にある最初のdivという指定
   &__container {
     > div:first-child {
-      margin-bottom: 60px;
+      margin-bottom: 60px; //PCの時には２カラムになる２カラム目との余白
     }
   }
 
   &__shopinfo {
     dd {
-      font-size: 1.125rem;
-      border-bottom: 1px dotted var(--primary);
-      padding-bottom: 0.5rem;
-      margin-bottom: 0.5rem;
+      font-size: 1.125rem; //16pxを18pxにする時は 1.125rem とやるとできる。
+      border-bottom: 1px dotted var(--primary); //点線の下線
+      padding-bottom: 0.5rem; //それぞれの項目の余白。1remよち0.5remの方が見た目がいい。
+      margin-bottom: 0.5rem; //それぞれの項目の余白。1remよち0.5remの方が見た目がいい。
     }
   }
 
+  // Googleマップ
   &__map {
-    aspect-ratio: 1 / 1;
+    //マップのサイズのスタイル
+    aspect-ratio: 1 / 1; // aspect-ratio:は親幅に合わせて拡大縮小していくので、サイズを1 / 1の正方形になるように制御
     width: 100%;
-    height: auto;
+    height: auto; //高さの方制御。　高さの方が出てたので、こうするとちゃんと正方形になる。
   }
 
+  // お問い合わせボタン
   &__contact {
-    text-align: center;
-    margin-top: 60px;
+    text-align: center; //画面の中央寄せ
+    margin-top: 60px; //上のマップとの余白
   }
 
   // PC =====
   @include mq {
     &__container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      display: flex; //2カラムにするので横並び
+      justify-content: space-between; //２カラムの２つのコンテンツを両端に
+      align-items: center; //水平中央で画面の中央
 
+      // 項目
       > div:first-child {
-        width: 40%;
+        width: 40%; //画面に対して40％の幅にしたいので親に対して40%ということ
       }
 
+      //マップ
       > div:nth-child(2) {
-        width: 300px;
+        width: 300px; // マップの幅。マップは指定したサイズに応じた大きなになる。
       }
     }
   }
 }
 
-// フッター
+// フッター　ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 .site-footer {
+
+  //フッターの大枠の箱の上下に余白のしてい
   padding-top: 50px;
   padding-bottom: 20px;
 
+  //ページトップへのボタンの画像を入れた箱(ページトップへのボタンを右寄せにする指定)
   .pagetop {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 50px;
+    display: flex; // imgが元々ブロックなので、右寄せにした時の左のスペースも押せちゃうので、flexかけた子要素はコンテンツに寄って幅が決まるので、flexにして
+    justify-content: flex-end; //これで右寄せ
+    margin-bottom: 50px; //下のロゴの余白
 
+    //ページトップへのボタンの画像
     img {
-      width: 50px;
+      width: 50px; //ページトップへのボタンの画像の大きさ
     }
   }
 
+  //ロゴ
   &__logo {
+    //中央揃え
     img {
       margin-left: auto;
       margin-right: auto;
     }
   }
 
+//コピーライト
   .copyright {
-    display: block;
-    text-align: center;
+    //コピーライトのsmallタグはインライン要素なので、ブロック要素に変えることで中央揃えができる。
+    display: block; // ブロック要素に変える
+    text-align: center; // 中央揃え
   }
 }
+
