@@ -12,7 +12,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700&display=swap" rel="stylesheet" />
 
+    <!-- メインビジュアル画像のスライドの実装。 -->
     <link rel="stylesheet" href="js/slick/slick.css" />
+    <!-- 画像がスクロールに寄ってアニメーションする機能がaos -->
     <link rel="stylesheet" href="js/aos/aos.css" />
     <link rel="stylesheet" href="css/style.min.css" />
 </head>
@@ -71,6 +73,7 @@
     </header>
 
     <main>
+        <!-- 最初のブロック -->
         <section class="introduction">
             <div class="container introduction__container">
                 <!-- テキストエリア -->
@@ -88,6 +91,7 @@
                 </div>
                 <!-- 画像 -->
                 <div class="introduction__img">
+                    <!-- data-aos="fade-up"を足すだけでAOSのスクロールした際のアニメーションが実装できる。 -->
                     <img src="img/hana_right.png" alt="" data-aos="fade-up" />
                 </div>
             </div>
@@ -95,6 +99,7 @@
 
         <!-- 背景固定のところ -->
         <div class="bg-inbetween">
+            <!-- 切り抜く際のマスク用のdivタグ -->
             <div class="bg-inbetween__inner">
                 <img src="img/bg_img01.jpg" alt="" />
             </div>
@@ -108,18 +113,31 @@
 
                 <!-- 3つの画像のところ -->
                 <ul class="news__list">
+                    <!-- ３つの画像にAOSのアニメーションを適用
+                     data-aos="zoom-out" で選んだアニメーションのデータで、
+                     最後の data-aos-duration="500" はアニメーションの自体を少し遅くさせてふっわとさせる指定。 -->
                     <li data-aos="zoom-out" data-aos-duration="500">
                         <a href="#">
                             <img src="img/news01.jpg" alt="" />
                             <p>お花教室のご案内</p>
                         </a>
                     </li>
+                    <!-- ３つの画像にAOSのアニメーションを適用
+                     data-aos="zoom-out" で選んだアニメーションのデータで、
+                     次の data-aos-delay="400" は１枚目より0.4秒遅れて実装させる。
+                     最後の data-aos-duration="500" はアニメーションの自体を少し遅くさせてふっわとさせる指定。 
+                    -->
                     <li data-aos="zoom-out" data-aos-delay="400" data-aos-duration="500">
                         <a href="#">
                             <img src="img/news02.jpg" alt="" />
                             <p>6月のキャンペーン</p>
                         </a>
                     </li>
+                    <!-- ３つの画像にAOSのアニメーションを適用
+                     data-aos="zoom-out" で選んだアニメーションのデータで、
+                     次の data-aos-delay="400" は２枚目より0.4秒遅れて実装させる。
+                     最後の data-aos-duration="500" はアニメーションの自体を少し遅くさせてふっわとさせる指定。 
+                    -->
                     <li data-aos="zoom-out" data-aos-delay="800" data-aos-duration="500">
                         <a href="#">
                             <img src="img/news03.jpg" alt="" />
@@ -163,7 +181,7 @@
                             </p>
                         </article>
 
-                        <!-- ボタンのところ -->
+                        <!-- ボタン（ここのdivはボタンを画面の中央寄せにするときにaタグだと出来ないので、そのためのdiv） -->
                         <div class="event__btn-area">
                             <a href="#" class="btn btn-primary">お店のブログはこちら</a>
                         </div>
@@ -273,7 +291,9 @@
     </footer>
 
     <script src="js/jquery/jquery-3.7.1.min.js"></script>
+    <!-- メインビジュアル画像のスライドの実装。 -->
     <script src="js/slick/slick.min.js"></script>
+    <!-- 画像がスクロールに寄ってアニメーションする機能がaos -->
     <script src="js/aos/aos.js"></script>
     <script src="js/script.js"></script>
 </body>
